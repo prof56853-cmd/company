@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+*.local
+
+# local data & secrets — never commit
+data/
+.env
+.env.*
+!.env.example
+!.env.production.example
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.vercel/
+
+# logs & temp
+*.log
+tmp_*.mjs
+temp_*.mjs
+.tmp-*
+.preview/
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# test screenshots at repo root
+/*.png
+/*.json.tmp

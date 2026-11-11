@@ -1,0 +1,45 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Don't rewrite files or directories
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  
+  # Rewrite everything else to index.html for React Router
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/svg "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# PHP settings
+<IfModule mod_php7.c>
+  php_value upload_max_filesize 10M
+  php_value post_max_size 10M
+  php_value max_execution_time 300
+</IfModule>
+
+# Deny access to sensitive files
+<FilesMatch "^\.env|composer\.json|package\.json|schema\.sql">
+  Require all denied
+</FilesMatch>
